@@ -4,17 +4,24 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class FileWatcherEventServiceTest {
     Path dir =Paths.get("testExec");
     Path tempFile = null;
+
+    @Autowired
+    FileWatcherEventService fes;
 
     @Before
     public void setUp() throws Exception {
@@ -23,7 +30,7 @@ public class FileWatcherEventServiceTest {
         } catch (FileAlreadyExistsException e) {
             // no problem
         }
-        tempFile = Files.createFile(Paths.get(dir.toString(), "" + System.currentTimeMillis()));
+        tempFile = Files.createFile(Paths.get(dir.toString(), "12345_" + System.currentTimeMillis()));
     }
 
     @After
@@ -34,7 +41,6 @@ public class FileWatcherEventServiceTest {
 
     @Test
     public void testCreateEvents() throws IOException {
-            FileWatcherEventService fes = new FileWatcherEventService();
             fes.processEvent("ENTRY_CREATE", tempFile);
     }
 }

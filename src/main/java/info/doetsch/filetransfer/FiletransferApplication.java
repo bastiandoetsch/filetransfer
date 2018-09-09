@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import java.io.IOException;
 
-@EnableMongoRepositories
 @SpringBootApplication
 public class FiletransferApplication {
 

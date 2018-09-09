@@ -1,13 +1,13 @@
 package info.doetsch.filetransfer.services;
 
-import info.doetsch.filetransfer.entities.SupplierConfiguration;
-import info.doetsch.filetransfer.repositories.SupplierConfigurationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
 import java.util.Optional;
 
+@EnableMongoRepositories
 @Service
 public class FileWatcherEventService {
 
@@ -16,8 +16,13 @@ public class FileWatcherEventService {
 
     public void processEvent(String kind, Path path) {
         if ("ENTRY_CREATE".equals(kind)) {
-            getConfiguration(path);
+            transferFileToDestination(getConfiguration(path), path);
         }
+    }
+
+    private void transferFileToDestination(Optional<SupplierConfiguration> configuration, Path path) {
+        // now convert the filename to the destination filename
+        // use sftp (JSch) to transfer file
     }
 
     /**

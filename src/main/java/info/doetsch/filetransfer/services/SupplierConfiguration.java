@@ -1,4 +1,4 @@
-package info.doetsch.filetransfer.entities;
+package info.doetsch.filetransfer.services;
 
 import org.springframework.data.annotation.Id;
 
