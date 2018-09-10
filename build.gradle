@@ -31,6 +31,7 @@ ext {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+	compile ('com.jcraft:jsch:0.1.54')
 	//compile('org.springframework.cloud:spring-cloud-starter-aws')
 	//compile('org.springframework.cloud:spring-cloud-stream')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
